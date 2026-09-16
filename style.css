@@ -1,0 +1,562 @@
+/* ==========================================================================
+   接驳车实时查询 —— 深色主题样式
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #0f172a;
+  --card: #1e293b;
+  --card-soft: rgba(30, 41, 59, 0.5);
+  --inner: rgba(51, 65, 85, 0.5);
+  --inner-solid: #334155;
+  --border: #334155;
+  --border-strong: #475569;
+
+  --text: #ffffff;
+  --text-100: #f1f5f9;
+  --text-300: #cbd5e1;
+  --text-400: #94a3b8;
+  --text-600: #475569;
+
+  --cyan-400: #22d3ee;
+  --cyan-300: #67e8f9;
+  --green-500: #22c55e;
+  --blue-500: #3b82f6;
+  --amber-400: #fbbf24;
+
+  --radius-xl: 12px;
+  --radius-lg: 8px;
+  --radius-md: 6px;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Microsoft YaHei",
+    "PingFang SC", "Hiragino Sans GB", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.page {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+/* ------------------------------- 标题 ------------------------------- */
+
+.hero {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--cyan-400), var(--blue-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-sub {
+  margin: 0.5rem 0 0;
+  color: var(--text-400);
+}
+
+/* ---------------------------- 控制卡片 ---------------------------- */
+
+.control-card {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--card-soft);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65);
+}
+
+.control-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.clock-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.clock-icon {
+  display: flex;
+  color: var(--text-400);
+}
+
+.clock-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.clock {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-date {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-400);
+}
+
+/* 分段按钮 */
+
+.segmented {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  background: var(--bg);
+  border-radius: 9999px;
+}
+
+.seg-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--text-300);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.seg-btn:hover {
+  background: var(--border-strong);
+}
+
+.seg-btn.is-active {
+  background: var(--green-500);
+  color: #ffffff;
+}
+
+.seg-btn.is-active:hover {
+  background: var(--green-500);
+}
+
+.divider {
+  height: 1px;
+  margin: 1rem 0;
+  background: var(--border);
+}
+
+/* 查询时间 */
+
+.query-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.query-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-300);
+}
+
+.time-input {
+  padding: 0.25rem 0.5rem;
+  background: var(--inner-solid);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.time-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--cyan-400);
+}
+
+.link-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cyan-400);
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.link-btn:hover {
+  color: var(--cyan-300);
+}
+
+.btn-icon,
+.section-icon {
+  display: flex;
+}
+
+.btn-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.section-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ------------------------------- 班次区 ------------------------------- */
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section-head {
+  text-align: center;
+}
+
+.section-head h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-300);
+}
+
+.day-chip {
+  color: var(--cyan-400);
+}
+
+.panel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.panel-list[hidden] {
+  display: none;
+}
+
+.panel {
+  width: 100%;
+  padding: 1.5rem;
+  background: var(--card);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.panel-head .panel-icon {
+  display: flex;
+  color: var(--cyan-400);
+}
+
+.panel-head svg {
+  width: 24px;
+  height: 24px;
+}
+
+.panel-head h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-100);
+}
+
+.panel-meta {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--text-400);
+  text-align: right;
+}
+
+.trip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.trip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: var(--inner);
+  border-radius: var(--radius-lg);
+}
+
+.trip.is-past {
+  opacity: 0.45;
+}
+
+.trip.is-next {
+  box-shadow: inset 3px 0 0 var(--cyan-400);
+}
+
+.trip-main {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.trip-time {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.trip-route {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  color: var(--text-400);
+}
+
+.trip-route svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.trip-route p {
+  margin: 0;
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.trip-note {
+  margin: 0.25rem 0 0 1.5rem;
+  font-size: 0.7rem;
+  color: var(--text-400);
+  opacity: 0.85;
+}
+
+.countdown {
+  flex-shrink: 0;
+  margin-left: 1rem;
+  text-align: right;
+}
+
+.countdown-value {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--cyan-300);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.countdown-unit {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-400);
+}
+
+.trip.is-soon .countdown-value {
+  color: var(--amber-400);
+}
+
+.empty-item {
+  padding: 1rem;
+  color: var(--text-400);
+  font-size: 0.875rem;
+}
+
+.day-note {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-300);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.day-note[hidden] {
+  display: none;
+}
+
+/* 线路标签 */
+
+.line-badge {
+  flex: none;
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.line-badge.tone-blue {
+  background: rgba(59, 130, 246, 0.18);
+  color: #93c5fd;
+}
+
+.line-badge.tone-green {
+  background: rgba(34, 197, 94, 0.18);
+  color: #86efac;
+}
+
+.line-badge.tone-amber {
+  background: rgba(251, 191, 36, 0.18);
+  color: #fcd34d;
+}
+
+/* ------------------------------- 状态 ------------------------------- */
+
+.status {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-300);
+  font-size: 0.875rem;
+}
+
+.status p {
+  margin: 0 0 0.4rem;
+}
+
+.status p:last-child {
+  margin-bottom: 0;
+}
+
+.status.is-error {
+  background: rgba(127, 29, 29, 0.35);
+  border-color: #b91c1c;
+  color: #fecaca;
+}
+
+/* ------------------------------- 页脚 ------------------------------- */
+
+.site-footer {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.ghost-btn {
+  padding: 0.5rem 1.5rem;
+  background: var(--inner-solid);
+  border: 0;
+  border-radius: var(--radius-lg);
+  color: var(--text-300);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.ghost-btn:hover {
+  background: var(--border-strong);
+  color: #ffffff;
+}
+
+.credit {
+  margin: 1.5rem 0 0;
+  padding-bottom: 0.5rem;
+  color: var(--text-600);
+  font-size: 0.6875rem;
+}
+
+/* ------------------------------ 小屏适配 ------------------------------ */
+
+@media (max-width: 640px) {
+  body {
+    padding: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .control-top {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .clock {
+    font-size: 1.5rem;
+  }
+
+  .segmented {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .seg-btn {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .panel {
+    padding: 1.25rem;
+  }
+
+  .trip {
+    padding: 0.875rem;
+  }
+
+  .trip-time {
+    font-size: 1.25rem;
+  }
+
+  .countdown-value {
+    font-size: 1rem;
+  }
+}

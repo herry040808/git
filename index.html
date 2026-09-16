@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="兰台研究生公寓（南师附中）接驳车实时查询：显示当前时间与下一班车倒计时，支持工作日 / 周末自动切换和自定义查询时间。" />
+  <title>接驳车实时查询</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f172a'/%3E%3Crect x='7' y='8' width='18' height='12' rx='2.5' fill='none' stroke='%2322d3ee' stroke-width='2'/%3E%3Cpath d='M7 14h18' stroke='%2322d3ee' stroke-width='2'/%3E%3Ccircle cx='11' cy='23' r='2' fill='%2322d3ee'/%3E%3Ccircle cx='21' cy='23' r='2' fill='%2322d3ee'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <h1>接驳车实时查询</h1>
+      <p class="hero-sub" id="site-title">正在读取时刻表…</p>
+    </header>
+
+    <section class="control-card">
+      <div class="control-top">
+        <div class="clock-block">
+          <span class="clock-icon" id="clock-icon" aria-hidden="true"></span>
+          <div>
+            <p class="clock" id="current-time">--:--:--</p>
+            <p class="clock-date" id="current-date">--</p>
+          </div>
+        </div>
+
+        <div class="segmented" role="group" aria-label="日期类型">
+          <button type="button" class="seg-btn is-active" data-mode="auto">智能</button>
+          <button type="button" class="seg-btn" data-mode="weekday">工作日</button>
+          <button type="button" class="seg-btn" data-mode="weekend">周末</button>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="query-row">
+        <label class="query-label" for="query-time">查询时间：</label>
+        <input type="time" id="query-time" class="time-input" step="60" />
+        <button type="button" id="use-now" class="link-btn">
+          <span class="btn-icon" id="refresh-icon" aria-hidden="true"></span>
+          <span>使用当前时间</span>
+        </button>
+      </div>
+    </section>
+
+    <main class="board">
+      <div class="section-head">
+        <h2>
+          <span class="section-icon" id="section-icon" aria-hidden="true"></span>
+          即将发车
+          <span class="day-chip" id="day-kind">工作日</span>
+        </h2>
+      </div>
+
+      <div class="panel-list" id="upcoming"></div>
+      <div class="panel-list" id="full-board" hidden></div>
+      <p class="day-note" id="day-note" hidden></p>
+    </main>
+
+    <div class="status" id="status" role="status" hidden></div>
+
+    <footer class="site-footer">
+      <button type="button" id="toggle-full" class="ghost-btn">显示完整时刻表</button>
+      <p class="credit" id="credit">数据更新于 —</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
