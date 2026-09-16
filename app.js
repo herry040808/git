@@ -11,7 +11,7 @@ const DATA_URL = 'data/schedule.json';
 const TICK_MS = 1000;
 const FORCE_SYNC_MS = 120000; // 标签页被挂起等情况的兜底刷新
 const SOON_SEC = 60; // 剩余不足 1 分钟视为「即将发车」
-const UPCOMING_COUNT = 3; // 每个方向展示的下一班车数量
+const UPCOMING_COUNT = 2; // 每个方向展示的下一班车数量
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const WEEKDAY_NAMES = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
@@ -245,7 +245,6 @@ function render() {
   const groups = directions.map((direction) => ({
     direction,
     trips: normalizeTrips(day[direction.key]),
-    note: (day.notes && day.notes[direction.key]) || direction.note || '',
   }));
 
   els.upcoming.replaceChildren(...groups.map(buildUpcomingPanel));
@@ -270,19 +269,14 @@ function buildUpcomingPanel(group) {
       }),
     );
   } else {
-    for (const trip of upcoming) list.append(buildTripRow(trip, { withBadge: true }));
+    for (const trip of upcoming) list.append(buildTripRow(trip, { compact: true }));
   }
 
   return el('section', { class: 'panel', dataset: { direction: group.direction.key || '' } }, [
     el('div', { class: 'panel-head' }, [
       el('span', { class: 'panel-icon' }, [icon('bus')]),
       el('h3', { text: group.direction.label || group.direction.key || '未命名方向' }),
-      el('span', {
-        class: 'panel-meta',
-        text: group.trips.length ? `共 ${group.trips.length} 班` : '',
-      }),
     ]),
-    group.note ? el('p', { class: 'panel-note', text: group.note }) : null,
     list,
   ]);
 }
@@ -301,13 +295,13 @@ function buildFullPanel(group) {
       el('span', { class: 'panel-icon' }, [icon('bus')]),
       el('h3', { text: group.direction.label || group.direction.key || '未命名方向' }),
     ]),
-    group.note ? el('p', { class: 'panel-note', text: group.note }) : null,
     list,
   ]);
 }
 
 function buildTripRow(trip, options) {
   const withBadge = Boolean(options && options.withBadge);
+  const compact = Boolean(options && options.compact);
   const badgeClass = trip.tone ? `line-badge tone-${trip.tone}` : 'line-badge';
 
   const routeChildren = [icon('route')];
@@ -321,7 +315,7 @@ function buildTripRow(trip, options) {
     el('div', { class: 'trip-main' }, [
       el('p', { class: 'trip-time', text: trip.label }),
       el('div', { class: 'trip-route' }, routeChildren),
-      trip.note ? el('p', { class: 'trip-note', text: trip.note }) : null,
+      !compact && trip.note ? el('p', { class: 'trip-note', text: trip.note }) : null,
     ]),
     el('div', { class: 'countdown' }, [countdownValue, countdownUnit]),
   ]);

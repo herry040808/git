@@ -312,23 +312,6 @@ body {
   color: var(--text-100);
 }
 
-.panel-meta {
-  margin-left: auto;
-  font-size: 0.75rem;
-  color: var(--text-400);
-  text-align: right;
-}
-
-.panel-note {
-  margin: 0 0 1rem;
-  padding: 0.6rem 0.75rem;
-  background: rgba(15, 23, 42, 0.55);
-  border-radius: var(--radius-md);
-  color: var(--text-400);
-  font-size: 0.75rem;
-  line-height: 1.6;
-}
-
 .trip-list {
   display: flex;
   flex-direction: column;
