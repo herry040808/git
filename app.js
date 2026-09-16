@@ -245,6 +245,7 @@ function render() {
   const groups = directions.map((direction) => ({
     direction,
     trips: normalizeTrips(day[direction.key]),
+    note: (day.notes && day.notes[direction.key]) || direction.note || '',
   }));
 
   els.upcoming.replaceChildren(...groups.map(buildUpcomingPanel));
@@ -281,6 +282,7 @@ function buildUpcomingPanel(group) {
         text: group.trips.length ? `共 ${group.trips.length} 班` : '',
       }),
     ]),
+    group.note ? el('p', { class: 'panel-note', text: group.note }) : null,
     list,
   ]);
 }
@@ -299,6 +301,7 @@ function buildFullPanel(group) {
       el('span', { class: 'panel-icon' }, [icon('bus')]),
       el('h3', { text: group.direction.label || group.direction.key || '未命名方向' }),
     ]),
+    group.note ? el('p', { class: 'panel-note', text: group.note }) : null,
     list,
   ]);
 }
